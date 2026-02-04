@@ -46,9 +46,10 @@ export default function AnalysisForm({ onAnalysisComplete, setLoading }: Analysi
 
             const response = await axios.post('/api/analyze', apiData)
             onAnalysisComplete(response.data)
-        } catch (error) {
+        } catch (error: any) {
             console.error('Analysis failed:', error)
-            alert('Analysis failed. Please make sure the backend is running.')
+            const errorMessage = error.response?.data?.detail || error.message || 'Unknown error occurred'
+            alert(`Analysis failed: ${errorMessage}. \n\nCheck console for details. Ensure Backend is running.`)
             setLoading(false)
         }
     }

@@ -132,7 +132,7 @@ export default function About() {
                                 Get Started Free
                             </button>
                             <a
-                                href="/docs"
+                                href="http://127.0.0.1:8000/docs"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="bg-white/10 border-2 border-white/30 text-white px-8 py-3 rounded-xl font-bold hover:bg-white/20 transition-all duration-300"
