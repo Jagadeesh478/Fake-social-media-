@@ -7,7 +7,18 @@ from datetime import datetime
 from typing import List, Dict, Any
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "risk_detector.db")
+import tempfile
+
+# Determine database path (handle Vercel read-only filesystem)
+try:
+    test_path = os.path.join(os.path.dirname(__file__), ".test_write")
+    with open(test_path, "w") as f:
+        f.write("test")
+    os.remove(test_path)
+    DB_PATH = os.path.join(os.path.dirname(__file__), "risk_detector.db")
+except Exception:
+    DB_PATH = os.path.join(tempfile.gettempdir(), "risk_detector.db")
+    print(f"Running in read-only environment. Database path: {DB_PATH}")
 
 
 def init_db():
